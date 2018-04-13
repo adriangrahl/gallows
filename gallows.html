@@ -14,7 +14,7 @@
     </div>
     <div class="container">
 
-        <div class="sprite" id="sprite"></div>
+        <div class="sprite"></div>
         <ul class="lacunas text-center"></ul>
         <div class="text-center">
         <input id="entrada"
@@ -26,9 +26,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/sprite.js"></script>
     <script>
-        var sprite = new Sprite();
-        sprite.createSprite('.sprite');
-        sprite.nextFrame();
+        var sprite = createSprite('.sprite');
         setInterval(function(){
             sprite.nextFrame();
         }, 500);

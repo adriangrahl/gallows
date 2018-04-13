@@ -1,33 +1,30 @@
-class Sprite
-{
+function createSprite(selector) {
 
-    constructor()
-    {
-        this._selector = undefined;
-        this._classList = ['frame1', 'frame2', 'frame3', 'frame4', 'frame5', 'frame6', 'frame7', 'frame8', 'frame9'];
-    };
+    let $el = $(selector);
 
-    createSprite(selector)
-    {
-        return this._selector = $(selector);
+    var frames = [
+      'frame1', 'frame2', 'frame3', 'frame4', 'frame5', 'frame6', 'frame7', 'frame8', 'frame9'
+    ];
+
+    var current = 0;
+    var last = frames.length - 1;
+
+    $el.addClass(frames[current]);
+
+    function hasNext(){
+      return current + 1 <= last;
     }
 
-    nextFrame()
-    {
-        let selector = $(this._selector);
-        let presentClass = selector[0].classList[1];
-        if (!presentClass) {
-            selector.addClass(this._classList[0]);
-        } else {
-            this._classList.map(function(actualClass, i, classList){
-                if (presentClass == actualClass){
-                    selector.removeClass(presentClass);
-                    if (i < 9)
-                        selector.addClass(classList[i+1]);
-                    else
-                        selector.addClass(classList[1]);
-                }
-            });
-        }
+    function moveFrame(from, to){
+      $el.removeClass(from)
+        .addClass(to);
+    }
+
+    function nextFrame(){
+      if (hasNext()) moveFrame(frames[current], frames[++current]);
+    }
+
+    return {
+      nextFrame : nextFrame
     }
 }
