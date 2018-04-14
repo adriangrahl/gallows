@@ -1,26 +1,19 @@
 var createGame = function (sprite) {
 
-  var findChar = function (char, startFrom) {
-    return secretWord
-      .split('')
-      .indexOf(char, startFrom + 1);
-  };
-
   var processInput = function(char) {
-    var idxFound = secretWord
-      .split('')
-      .filter(c => c.includes(char))
-      .reduce((currentIdx, c, i, arr) => {
-        var result = findChar(c, currentIdx);
-        fillGap(c, result);
-        return result;
-      },-1);
 
-    if (idxFound > -1) {
-      console.log('You nailed it!');
-      return getGaps();
-    } else
+    var exp = new RegExp(char, 'gi')
+      , result
+      , right = false;
+
+    while (result = exp.exec(secretWord)) {
+      right = true;
+      fillGap(char, result.index);
+    }
+
+    if (!right){
       sprite.nextFrame();
+    }
   };
 
   var fillGap = function (char, pos) {
