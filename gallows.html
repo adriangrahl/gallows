@@ -32,5 +32,12 @@
             sprite.nextFrame();
         }, 500);
     </script> -->
+    <script>
+      var sprite = createSprite('.sprite');
+      var game = createGame(sprite);
+      game.setSecretWord('calopsita');
+      game.processInput('a');
+      game.processInput('x');
+    </script>
 </body>
 </html>
