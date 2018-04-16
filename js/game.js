@@ -16,45 +16,50 @@ var createGame = function (sprite) {
     }
   };
 
-  var getAccumulatedSpaces = (accumulated, actual) => (actual == '') ? (accumulated + ' ') : (''+accumulated + actual);
-
   var won = function () {
-    const exp = /[^ ]*/;
-    var strAccumulated = getGaps().reduce(getAccumulatedSpaces);
-    return strAccumulated.match(exp)[0].length == getGaps().length;
+
+    return letterList.length ? !letterList.some(gap => gap == '') : false;
   };
 
   var lost = function () {
-    return !won() && sprite.isFinished();
+
+    return sprite.isFinished();
   };
 
   var wonOrLost = function () {
+
     return won() || lost();
   };
 
   var fillGap = function (char, pos) {
+
     letterList[pos] = char;
   };
 
   var createGaps = function () {
+
     letterList = Array(secretWord.length).fill('');
   };
 
   var setStage = function () {
+
     stage = 2;
   };
 
   var setSecretWord = function(word) {
+
     secretWord = word;
     setStage();
     createGaps();
   };
 
   var getStage = function() {
+
     return stage;
   };
 
   var getGaps = function() {
+
     return letterList;
   }
 
@@ -63,6 +68,7 @@ var createGame = function (sprite) {
   var secretWord = '';
 
   return {
+
     setSecretWord : setSecretWord,
     getStage : getStage,
     getGaps : getGaps,
