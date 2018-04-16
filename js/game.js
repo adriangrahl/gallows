@@ -16,6 +16,22 @@ var createGame = function (sprite) {
     }
   };
 
+  var getAccumulatedSpaces = (accumulated, actual) => (actual == '') ? (accumulated + ' ') : (''+accumulated + actual);
+
+  var won = function () {
+    const exp = /[^ ]*/;
+    var strAccumulated = getGaps().reduce(getAccumulatedSpaces);
+    return strAccumulated.match(exp)[0].length == getGaps().length;
+  };
+
+  var lost = function () {
+    return !won() && sprite.isFinished();
+  };
+
+  var wonOrLost = function () {
+    return won() || lost();
+  };
+
   var fillGap = function (char, pos) {
     letterList[pos] = char;
   };
@@ -50,6 +66,9 @@ var createGame = function (sprite) {
     setSecretWord : setSecretWord,
     getStage : getStage,
     getGaps : getGaps,
-    processInput : processInput
+    processInput : processInput,
+    won : won,
+    lost : lost,
+    wonOrLost : wonOrLost
   }
 };
