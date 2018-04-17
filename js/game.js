@@ -14,6 +14,8 @@ var createGame = function (sprite) {
     if (!right){
       sprite.nextFrame();
     }
+
+    return letterList;
   };
 
   var won = function () {

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/sprite.css">
-    <link rel="stylesheet" href="css/lacuna.css">
+    <link rel="stylesheet" href="css/gap.css">
     <title>The Gallows</title>
 </head>
 <body>
@@ -15,17 +15,18 @@
     <div class="container">
 
         <div class="sprite"></div>
-        <ul class="lacunas text-center"></ul>
+        <ul class="gaps text-center"></ul>
         <div class="text-center">
-        <input id="entrada"
-            class="entrada"
-            placeholder="Palavra secreta" autofocus>
+        <input id="input"
+            class="input"
+            placeholder="Secret Word" autofocus>
         </div>
     </div>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/sprite.js"></script>
     <script src="js/game.js"></script>
+    <script src="js/controller.js"></script>
     <!-- <script>
         var sprite = createSprite('.sprite');
         setInterval(function(){
@@ -35,10 +36,7 @@
     <script>
       var sprite = createSprite('.sprite');
       var game = createGame(sprite);
-      game.setSecretWord('calopsita');
-      game.processInput('a');
-      game.processInput('x');
-      game.getGaps();
+      createController(game).start();
     </script>
 </body>
 </html>
