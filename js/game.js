@@ -2,6 +2,8 @@ var createGame = function (sprite) {
 
   var processInput = function(char) {
 
+    if(!char.trim()) throw Error('Invalid guess');
+
     var exp = new RegExp(char, 'gi')
       , result
       , right = false;
@@ -47,6 +49,8 @@ var createGame = function (sprite) {
   };
 
   var setSecretWord = function(word) {
+
+    if(!word.trim()) throw Error('Secret Word invalid');
 
     secretWord = word;
     setStage();

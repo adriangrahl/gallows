@@ -28,24 +28,36 @@ var createController = function (game) {
 
   var guess = function () {
 
-    game.processInput($input.val().trim().substr(0,1));
-    $input.val('');
-    showGaps();
+    try {
 
-    setTimeout(function() {
-      if (game.wonOrLost()) {
-        alert('Congrats, you have '+(game.won() ? 'won' : 'lost'));
-        reset();
-      }
-    },200);
+      game.processInput($input.val().trim().substr(0,1));
+      $input.val('');
+      showGaps();
+
+      setTimeout(function() {
+        if (game.wonOrLost()) {
+          alert('Congrats, you have '+(game.won() ? 'won' : 'lost'));
+          reset();
+        }
+      },200);
+    } catch (e) {
+
+      alert(e.message);
+    }
   };
 
   var keepSecretWord = function () {
 
-    game.setSecretWord($input.val());
-    $input.val('');
-    showGaps();
-    changePlaceHolder('guess');
+    try {
+
+      game.setSecretWord($input.val());
+      $input.val('');
+      showGaps();
+      changePlaceHolder('guess');
+    } catch (e) {
+
+      alert(e.message);
+    }
   };
 
   var start = function () {
