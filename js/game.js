@@ -14,8 +14,6 @@ var createGame = function (sprite) {
     if (!right){
       sprite.nextFrame();
     }
-
-    return letterList;
   };
 
   var won = function () {
@@ -63,7 +61,14 @@ var createGame = function (sprite) {
   var getGaps = function() {
 
     return letterList;
-  }
+  };
+
+  var reset = function () {
+    stage = 1;
+    secretWord = '';
+    letterList = [];
+    sprite.reset();
+  };
 
   var letterList = [];
   var stage = 1;
@@ -77,6 +82,7 @@ var createGame = function (sprite) {
     processInput : processInput,
     won : won,
     lost : lost,
-    wonOrLost : wonOrLost
+    wonOrLost : wonOrLost,
+    reset : reset
   }
 };

@@ -6,15 +6,20 @@ var createController = function (game) {
   var showGaps = function () {
     $gaps.empty();
     game.getGaps().forEach(function(gap, i) {
-      $('<li id="gap'+i+'">')
+      $('<li>')
         .addClass('gap')
         .text(gap)
         .appendTo($gaps);
     });
-    //$gaps.append("<li class='gap' id='gap"+i+"'></li>"));
   };
 
-  var mudaPlaceHolder = function (text) {
+  var reset = function () {
+    game.reset();
+    $gaps.empty();
+    changePlaceHolder('Secret Word');
+  };
+
+  var changePlaceHolder = function (text) {
 
     $input
       .val('')
@@ -23,13 +28,16 @@ var createController = function (game) {
 
   var guess = function () {
 
-    game
-      .processInput($input.val())
-      .forEach(function(el, i) {
-        $('#gap'+i).prop('innerHTML',el);
-      });
+    game.processInput($input.val().trim().substr(0,1));
+    $input.val('');
+    showGaps();
 
-    //$('#gap0').prop('innerHTML','a');
+    setTimeout(function() {
+      if (game.wonOrLost()) {
+        alert('Congrats, you have '+(game.won() ? 'won' : 'lost'));
+        reset();
+      }
+    },200);
   };
 
   var keepSecretWord = function () {
@@ -37,7 +45,7 @@ var createController = function (game) {
     game.setSecretWord($input.val());
     $input.val('');
     showGaps();
-    mudaPlaceHolder('guess');
+    changePlaceHolder('guess');
   };
 
   var start = function () {
@@ -56,6 +64,5 @@ var createController = function (game) {
     });
   };
 
-  // retorna um objeto com a propriedade inicia, que deve ser chamada assim que o controller for criado.
   return { start : start };
 };
