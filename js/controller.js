@@ -1,11 +1,11 @@
-var createController = function (game) {
+const createController = game => {
 
-  var $input = $('#input');
-  var $gaps = $('.gaps');
+  const $input = $('#input');
+  const $gaps = $('.gaps');
 
-  var showGaps = function () {
+  const showGaps = () => {
     $gaps.empty();
-    game.getGaps().forEach(function(gap, i) {
+    game.getGaps().forEach((gap, i) => {
       $('<li>')
         .addClass('gap')
         .text(gap)
@@ -13,20 +13,15 @@ var createController = function (game) {
     });
   };
 
-  var reset = function () {
+  const reset = () => {
     game.reset();
     $gaps.empty();
     changePlaceHolder('Secret Word');
   };
 
-  var changePlaceHolder = function (text) {
+  const changePlaceHolder = text => $input.val('').attr('placeholder',text);
 
-    $input
-      .val('')
-      .attr('placeholder',text);
-  };
-
-  var guess = function () {
+  const guess = () => {
 
     try {
 
@@ -34,7 +29,7 @@ var createController = function (game) {
       $input.val('');
       showGaps();
 
-      setTimeout(function() {
+      setTimeout(() => {
         if (game.wonOrLost()) {
           alert('You have '+(game.won() ? 'won' : 'lost'));
           reset();
@@ -46,7 +41,7 @@ var createController = function (game) {
     }
   };
 
-  var keepSecretWord = function () {
+  const keepSecretWord = () => {
 
     try {
 
@@ -60,9 +55,9 @@ var createController = function (game) {
     }
   };
 
-  var start = function () {
+  const start = () => {
 
-    $input.keypress(function (event) {
+    $input.keypress(event => {
       if (event.which == 13) {
         switch (game.getStage()) {
           case 1:
@@ -76,5 +71,5 @@ var createController = function (game) {
     });
   };
 
-  return { start : start };
+  return { start };
 };

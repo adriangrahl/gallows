@@ -1,12 +1,11 @@
-const createGame = (sprite) => {
+const createGame = sprite => {
 
-  const processInput = (char) => {
+  const processInput = char => {
 
     if(!char.trim()) throw Error('Invalid guess');
 
     const exp = new RegExp(char, 'gi');
-    let result
-      , right = false;
+    let result, right = false;
 
     while (result = exp.exec(secretWord)) {
       right = true;
@@ -30,7 +29,7 @@ const createGame = (sprite) => {
 
   const setStage = () => stage = 2;
 
-  const setSecretWord = (word) => {
+  const setSecretWord = word => {
 
     if(!word.trim()) throw Error('Secret Word invalid');
 
@@ -64,5 +63,5 @@ const createGame = (sprite) => {
     lost,
     wonOrLost,
     reset
-  }
+  };
 };

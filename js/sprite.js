@@ -1,4 +1,4 @@
-const createSprite = (selector) => {
+const createSprite = selector => {
 
     const hasNext = () => current + 1 <= last;
 
@@ -26,8 +26,6 @@ const createSprite = (selector) => {
 
     let current = 0;
     let last = frames.length - 1;
-
-    $el.addClass(frames[current]);
 
     return {
       nextFrame,
