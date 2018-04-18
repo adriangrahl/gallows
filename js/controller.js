@@ -36,7 +36,7 @@ var createController = function (game) {
 
       setTimeout(function() {
         if (game.wonOrLost()) {
-          alert('Congrats, you have '+(game.won() ? 'won' : 'lost'));
+          alert('You have '+(game.won() ? 'won' : 'lost'));
           reset();
         }
       },200);

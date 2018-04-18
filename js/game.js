@@ -1,11 +1,11 @@
-var createGame = function (sprite) {
+const createGame = (sprite) => {
 
-  var processInput = function(char) {
+  const processInput = (char) => {
 
     if(!char.trim()) throw Error('Invalid guess');
 
-    var exp = new RegExp(char, 'gi')
-      , result
+    const exp = new RegExp(char, 'gi');
+    let result
       , right = false;
 
     while (result = exp.exec(secretWord)) {
@@ -18,37 +18,19 @@ var createGame = function (sprite) {
     }
   };
 
-  var won = function () {
+  const won = () => letterList.length ? !letterList.some(gap => gap == '') : false;
 
-    return letterList.length ? !letterList.some(gap => gap == '') : false;
-  };
+  const lost = () => sprite.isFinished();
 
-  var lost = function () {
+  const wonOrLost = () => won() || lost();
 
-    return sprite.isFinished();
-  };
+  const fillGap = (char, pos) => letterList[pos] = char;
 
-  var wonOrLost = function () {
+  const createGaps = () => letterList = Array(secretWord.length).fill('');
 
-    return won() || lost();
-  };
+  const setStage = () => stage = 2;
 
-  var fillGap = function (char, pos) {
-
-    letterList[pos] = char;
-  };
-
-  var createGaps = function () {
-
-    letterList = Array(secretWord.length).fill('');
-  };
-
-  var setStage = function () {
-
-    stage = 2;
-  };
-
-  var setSecretWord = function(word) {
+  const setSecretWord = (word) => {
 
     if(!word.trim()) throw Error('Secret Word invalid');
 
@@ -57,36 +39,30 @@ var createGame = function (sprite) {
     createGaps();
   };
 
-  var getStage = function() {
+  const getStage = () => stage;
 
-    return stage;
-  };
+  const getGaps = () => letterList;
 
-  var getGaps = function() {
-
-    return letterList;
-  };
-
-  var reset = function () {
+  const reset = () => {
     stage = 1;
     secretWord = '';
     letterList = [];
     sprite.reset();
   };
 
-  var letterList = [];
-  var stage = 1;
-  var secretWord = '';
+  let letterList = [];
+  let stage = 1;
+  let secretWord = '';
 
   return {
 
-    setSecretWord : setSecretWord,
-    getStage : getStage,
-    getGaps : getGaps,
-    processInput : processInput,
-    won : won,
-    lost : lost,
-    wonOrLost : wonOrLost,
-    reset : reset
+    setSecretWord,
+    getStage,
+    getGaps,
+    processInput,
+    won,
+    lost,
+    wonOrLost,
+    reset
   }
 };
